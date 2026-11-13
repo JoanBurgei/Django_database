@@ -1,3 +1,5 @@
+from django.contrib import messages
+
 from django.shortcuts import render, redirect, get_object_or_404
 
 from Myapp.models import Books
@@ -11,7 +13,7 @@ def show_books(request):
 
 def add_book(request):
     if request.method == 'POST':
-        form = BookForm(request.POST)
+        form = BookForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
             return redirect('show_books')
@@ -35,16 +37,19 @@ def add_book(request):
 def delete_book(request,id):
     book = Books.objects.get(id=id) #select * from books where id = 34
     book.delete() #delete from books where id = 34
+    messages.warning(request, f'{book.title} Deleted Successfully')
     return redirect('show_books')
+
 
 
 def edit_book(request,id):
     book = get_object_or_404(Books,pk=id)
     if request.method == 'POST':
-        form = BookForm(request.POST)
+        form = BookForm(request.POST,request.FILES, instance=book)
         if form.is_valid():
             form.save()
+            messages.success(request, f'{book.title} Updated Successfully')
             return redirect('show_books')
     else:
         form = BookForm(instance=book)
-    return render(request, 'add_book.html', {'form': form})
+    return render(request, 'edit_book.html', {'form': form})

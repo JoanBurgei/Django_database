@@ -13,6 +13,7 @@ class Books(models.Model):
     year = models.IntegerField()
     cost = models.IntegerField()
     isbn = models.CharField(unique=True, max_length=15, null=True)
+    cover = models.ImageField(upload_to='covers/', null=True)
     published = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     class Meta:
@@ -20,3 +21,8 @@ class Books(models.Model):
 
 # python manage.py makemigrations
 # python manage.py migrate
+
+# python manage.py createsuperuser
+# name = joan
+# pass: 12345678
+# addressL joan@test.com

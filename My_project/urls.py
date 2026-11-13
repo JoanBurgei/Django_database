@@ -16,9 +16,11 @@ Including another URLconf
 """
 from pathlib import Path
 
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
+from My_project import settings
 from Myapp import views
 
 urlpatterns = [
@@ -30,3 +32,5 @@ urlpatterns = [
     path('delete_book/<int:id>', views.delete_book, name='delete_book'),
     path('edit_book/<int:id>', views.edit_book, name='edit_book'),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

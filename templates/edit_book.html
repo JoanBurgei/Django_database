@@ -1,5 +1,5 @@
 {% extends 'master.html' %}
-{% load django_bootstrap5 %}{# from django_bootstrap5#}
+{% load django_bootstrap5 %}
 {% block title %} Edit Books {% endblock %}
 
 {% block content %}
@@ -7,11 +7,11 @@
     <div class="container">
     <div class="row justify-content-center">
         <div class="col-sm-4 border rounded p-3">
-            <form action="{% url 'edit_book' book_id %}" method="post">
+            <form action="{% url 'edit_book' form.instance.id %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
                 {% bootstrap_form form %}{# from django_bootstrap5 look good form#}
 {#            {{ form }}#}
-            <button class="btn btn-primary w-100"> Save Book </button>
+            <button class="btn btn-primary w-100"> Update Book </button>
             </form>
         </div>
     </div>
