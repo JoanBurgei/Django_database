@@ -18,7 +18,7 @@ from pathlib import Path
 
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from My_project import settings
 from Myapp import views
@@ -31,6 +31,12 @@ urlpatterns = [
     path('add_book', views.add_book, name='add_book'),
     path('delete_book/<int:id>', views.delete_book, name='delete_book'),
     path('edit_book/<int:id>', views.edit_book, name='edit_book'),
+
+    path('accounts/login', views.signin, name='signin'),
+    path('accounts/signup', views.signup, name='signup'),
+    path('accounts/logout', views.signout, name='signout'),
+    path('accounts/', include('django.contrib.auth.urls')),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

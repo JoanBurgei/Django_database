@@ -21,6 +21,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'show_books' %}">Show_books</a>
                 </li>
+                <li class="nav-item">
+                    <form action="{% url 'signout' %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Signout</button>
+                    </form>
+                </li>
             </ul>
             </div>
         </div>
